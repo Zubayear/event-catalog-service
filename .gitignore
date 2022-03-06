@@ -1,0 +1,4 @@
+# don't commit the service binary to vcs
+EventCatalog
+
+request.txt
