@@ -1,0 +1,20 @@
+version: v1
+directories:
+  - proto
+plugins:
+  - name: go
+    out: .
+  - name: grpc
+    out: .
+  - name: micro
+    out: .
+  - name: grpc-gateway
+    out: ./proto
+    opt:
+      - logtostderr=true
+      - register_func_suffix=EC
+  - name: openapiv2
+    out: ./proto/openapiv2
+    opt:
+      - use_go_templates=true
+      - logtostderr=true

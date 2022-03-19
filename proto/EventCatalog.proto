@@ -4,15 +4,50 @@ package EventCatalog;
 
 option go_package = "./proto;EventCatalog";
 
+import "google/api/annotations.proto";
+
 service EventCatalog {
-  rpc CreateEventWithCategory(CreateEventWithCategoryRequest) returns (CreateEventWithCategoryResponse) {}
-  rpc GetAllEvents(GetAllEventsRequest) returns (GetAllEventsResponse) {}
-  rpc GetEventById(GetEventByIdRequest) returns (GetEventByIdResponse) {}
-  rpc GetAllCategories(GetAllCategoriesRequest) returns (GetAllCategoriesResponse) {}
-  rpc UpdateEvent(UpdateEventByEventIdRequest) returns (UpdateEventByEventIdResponse) {}
-  rpc DeleteEventById(DeleteEventByIdRequest) returns (DeleteEventByIdResponse) {}
-  rpc GetEventByField(GetEventByFieldRequest) returns (GetEventByFieldResponse) {}
-  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {}
+  rpc CreateEventWithCategory(CreateEventWithCategoryRequest) returns (CreateEventWithCategoryResponse) {
+    option (google.api.http) = {
+      post: "/api/event-catalogs"
+      body: "*"
+    };
+  }
+  rpc GetEventByField(GetEventByFieldRequest) returns (GetEventByFieldResponse) {
+    option (google.api.http) = {
+      get: "/api/event-catalogs/fields"
+    };
+  }
+  rpc GetAllEvents(GetAllEventsRequest) returns (GetAllEventsResponse) {
+    option (google.api.http) = {
+      get: "/api/event-catalogs"
+    };
+  }
+  rpc GetEventById(GetEventByIdRequest) returns (GetEventByIdResponse) {
+    option (google.api.http) = {
+      get: "/api/event-catalogs/{id}"
+    };
+  }
+  rpc GetAllCategories(GetAllCategoriesRequest) returns (GetAllCategoriesResponse) {
+    option (google.api.http) = {
+      get: "/api/categories"
+    };
+  }
+  rpc UpdateEvent(UpdateEventByEventIdRequest) returns (UpdateEventByEventIdResponse) {
+    option (google.api.http) = {
+      put: "/api/event-catalogs"
+    };
+  }
+  rpc DeleteEventById(DeleteEventByIdRequest) returns (DeleteEventByIdResponse) {
+    option (google.api.http) = {
+      delete: "/api/event-catalogs/{id}"
+    };
+  }
+  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {
+    option (google.api.http) = {
+      post: "/api/categories"
+    };
+  }
 }
 
 enum Category {
@@ -119,7 +154,7 @@ message GetEventBySpecResponse {
 }
 
 message GetEventByFieldRequest {
-  string field_name = 1;
+  string name = 1;
 }
 
 message GetEventByFieldResponse {

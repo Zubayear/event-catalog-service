@@ -47,7 +47,7 @@ func (e *EventCatalog) CreateCategory(ctx context.Context, request *pb.CreateCat
 
 func (e *EventCatalog) GetEventByField(ctx context.Context, request *pb.GetEventByFieldRequest, response *pb.GetEventByFieldResponse) error {
 	log.Infof("Received EventCatalog.GetEventByField request: %v", request)
-	eventToReturn, err := e.repo.GetByField(ctx, request.GetFieldName())
+	eventToReturn, err := e.repo.GetByField(ctx, request.GetName())
 	if err != nil {
 		return err
 	}
